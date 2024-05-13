@@ -1,0 +1,9 @@
+---
+title: "Trabajo1"
+output: html_document
+date: "2024-05-12"
+---
+
+# Introducción
+
+## Los camarones
