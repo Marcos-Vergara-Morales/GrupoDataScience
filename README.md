@@ -1,4 +1,5 @@
 # Project Step 1
 ## Introductory ideas
 
-hola
+usethis::use_git()
+
