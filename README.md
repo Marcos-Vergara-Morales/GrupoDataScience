@@ -2,4 +2,3 @@
 ## Introductory ideas
 
 usethis::use_git()
-
