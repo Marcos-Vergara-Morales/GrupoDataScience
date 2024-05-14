@@ -19,3 +19,7 @@ calamarer
 
 
 bvcht
+
+x <- list(3,4)
+
+names(x) <- c("fanta", "pelo")
