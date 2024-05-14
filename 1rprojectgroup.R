@@ -14,6 +14,10 @@ gitcreds:: gitcreds_set()
 
 usethis::use_git()
 
+usethis::use_github()
+
+
+usethis::use_git_remote("https://github.com/Marcos-Vergara-Morales/GrupoDataScience.git", url = NULL, overwrite = TRUE)
 
 calamarer
 
