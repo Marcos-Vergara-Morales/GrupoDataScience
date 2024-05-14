@@ -6,6 +6,8 @@ Hoy en día las redes sociales juegan un papel fundamental en la industria del t
 
 Ademas, es uno de los servicios mas ofertados y con mayor demanda en los viajes turisticos, de hecho, es un factor de interés para las personas que viajan a esa zona en concreto, por lo que podria ser un indicador muy fiable de la opinión de los usuarios.
 
+#### Hemos decidido trabajar sobre una plataforma en particular, Google Review, la cual nos parece la más adecuada para nuestro proyecto. En efecto, nos permite recoger datos m´s simplemente para analizarlos, y es una de las plataformas más usadas para dar opiniones sobre actividades y lugares turísticos. 
+
 install.packages("usethis") library("usethis")
 
 usethis:: create_github_token()
