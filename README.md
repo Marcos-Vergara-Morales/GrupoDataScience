@@ -1,12 +1,11 @@
 # **Análisis de Sentimientos en Redes Sociales para la mejora de la experiencia en Palma de Mallorca: Caso del Ocio Nocturno**
 
-## Grupo : Cristina Miguel de Dios, Marcos Vergara, Romane Jalinier
+## Grupo : Cristina, Marcos, Romane
 
 Hoy en día las redes sociales juegan un papel fundamental en la industria del turismo, ya que mediante estas los turistas comparten sus experiencias, opiniones y recomendaciones en plataformas como Twitter, Instagram, TripAdvisor o blogs personales. Nuestra propuesta tiene como objetivo utilizar técnicas de análisis de sentimientos en redes sociales para comprender mejor la experiencia turística y mejorar los servicios ofrecidos en el sector del ocio nuctorno (bares, clubs, discotecas). Ya que consideramos que sera una fuente mas prolifera de opiniones de los usuarios, ya que es uan de las bases de la economia de la zona.
 
 *Ademas, es uno de los servicios mas ofertados y con mayor demanda en los viajes turisticos, de hecho, es un factor de interés para las personas que viajan a esa zona en concreto, por lo que podria ser un indicador muy fiable de la opinión de los usuarios.*
 
-<<<<<<< HEAD
 #### Con el fin de no perdernos en un mar de datos y expresiones múltiples de sentimientos por
 parte de los turistas, hemos decidido trabajar sobre una plataforma en particular, Google Review, la cual nos parece la más adecuada para nuestro proyecto. En efecto, nos permite recoger datos más simplemente para analizarlos, y es una de las plataformas más usadas para dar opiniones sobre actividades y lugares turísticos. 
 
@@ -53,11 +52,11 @@ gitcreds:: gitcreds_set()
 
 <<<<<<< Updated upstream
 usethis:: use_git()
-=======
+
 1 
 
 >>>>>>> Stashed changes
-=======
-#### Hemos decidido trabajar sobre una plataforma en particular, Google Review, la cual nos parece la más adecuada para nuestro proyecto. En efecto, nos permite recoger datos más simplemente para analizarlos, y es una de las plataformas más usadas para dar opiniones sobre actividades y lugares turísticos.
 
->>>>>>> b0991c01649dea123f23d088b81d0d5904efb767
+
+git status
+
