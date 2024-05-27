@@ -19,20 +19,5 @@ usethis::use_github()
 
 usethis::use_git_remote("https://github.com/Marcos-Vergara-Morales/GrupoDataScience.git", url = NULL, overwrite = TRUE)
 
-calamarer
+usethis::use_git()
 
-
-bvcht
-
-x <- list(3,4)
-
-names(x) <- c("fanta", "pelo")
-
-hell 
-
-hola caracola
-
-irenes
-
-
-hola carcoa
