@@ -20,7 +20,7 @@ View(reviews_filmaffinity)
 # Separar la columna en múltiples columnas, ya que al extraerlos estaban todos en la misma columna
 
 reviews_filmaffinity <- reviews_filmaffinity %>%
-  separate(`film_name||gender||film_avg_rate||review_rate||review_title||review_text`, 
+  separate("film_name||gender||film_avg_rate||review_rate||review_title||review_text", 
            into = c("film_name", "gender", "film_avg_rate", "review_rate", "review_title", "review_text"), 
            sep = "\\|\\|", 
            remove = TRUE) 
@@ -41,5 +41,19 @@ colnames(x = Peliculas)
 summary(Peliculas$review_rate)
 
 media_peli <- mean(Peliculas$film_avg_rate)
+
+
+# Cargar paquetes visualización de datos
+install.packages("ggplot2")
+library(ggplot2)
+
+# Histograma de valoraciones
+ggplot(data = Peliculas, aes(x = as.numeric(review_rate))) +
+  geom_histogram(binwidth = 1, fill = "skyblue", color = "black") +
+  labs(title = "Distribución de Valoraciones",
+       x = "Valoración",
+       y = "Frecuencia") +
+  theme_minimal()
+
 
 
