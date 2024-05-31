@@ -15,7 +15,7 @@ library(stringr)
 
 ##1r paso.Importar Datos
 
-reviews_filmaffinity <- read_csv("~/Downloads/reviews_filmaffinity.csv", 
+reviews_filmaffinity <- read_csv("C:/Users/crist/Downloads/reviews_filmaffinity.csv", 
                                  col_types = cols(`film_name||gender||film_avg_rate||review_rate||review_title||review_text` = col_character()))
 
 problems(reviews_filmaffinity)
@@ -136,6 +136,8 @@ install.packages("wordcloud")
 install.packages("SnowballC")
 install.packages("NLP")
 install.packages("RColorBrewer")
+install.packages("quanteda")
+install.packages("RcppParallel")
 
 
 library(tm)
@@ -143,16 +145,18 @@ library(wordcloud)
 library(SnowballC)
 library(NLP)
 library(RColorBrewer)
+library(quanteda)
+library(RcppParallel)
 
 ## Primero vamos a revisar si dentro de nuestra variable review_text hay opiniones vacíos
 
-# verificamos si hay textos vacíos o nulos en review_text
+# Verificamos si hay textos vacíos o nulos en review_text
 
 num_NA <- sum(is.na(Peliculas$review_text))  # Contar NA
 
 num_EMPTY <- sum(Peliculas$review_text == "")  # Contar cadenas vacías
 
-# Hacemo recuento con función cat()
+# Hacemos el recuento con la función cat()
 cat("Número de opiniones nulas:", num_NA, "\n")
 cat("Número de opiniones vacías:", num_EMPTY, "\n")
 
