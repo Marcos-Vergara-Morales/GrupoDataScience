@@ -10,6 +10,13 @@ A razón de esto, el presente estudio trata de analizar de forma exhaustiva las 
 Datos:
 Los datos utilizados en este estudio se han extraído de la plataforma Kaggle, una fuente de base de datos para proyectos de Data Science. Nuestro conjunto de datos escogido incluye información detallada sobre las valoraciones de películas españolas, nombre de la película, género, etc. Permitiendo de esta forma un análisis robusto e íntegro.
 
+## Hipótesis
+Nuestra hipotesis general es que la opinion de los usuarios influye en el consumo de determinadas peliculas, es decir, según el tipo y la cantidad de valoraciones que tenga una pelicula se puede extrapolar el nivel de exito de la misma.
+
+Por otro lado, también consideramos que hay determinados géneros que son mejor valorados que otros por su temática, en otras palabras, hay mayor aceptación hacia ciertos géneros por parte del público y esto se ve reflejado en sus opiniones.
+
+Además tambien esperamos encontrar mayor información en la reseña escrita que en la puntuación general, ya que consideramos que esta será más especifica y detallada puesto que el ratio se pondera respecto al total.
+
 ## Objetivos 
 
 En cuanto a los objetivos de nuestro estudio estos tratarán de:
