@@ -6,12 +6,18 @@ install.packages("tidyr")
 install.packages("dplyr")
 install.packages("readr")
 install.packages("stringr")
+install.packages("RcppArmadillo")
+
 
 # Cargar paquetes 
 library(readr)
 library(tidyr)
 library(dplyr)
 library(stringr)
+library(quanteda)
+library(RcppArmadillo)
+library(RcppParallel)
+
 
 ##1r paso.Importar Datos
 
