@@ -1,21 +1,3 @@
-# **Análisis de Sentimientos en Redes Sociales para la mejora de la experiencia en Palma de Mallorca: Caso del Ocio Nocturno**
-
-
-install.packages("usethis") library("usethis")
-
-usethis:: create_github_token()
-
-gitcreds:: gitcreds_set()
-
-<<<<<<< Updated upstream
-usethis:: use_git()
-
-1 
-
->>>>>>> Stashed changes
-
-
-git status
 
 # **Análisis de Sentimientos en Valoraciones de Películas Españolas: Patrones y Tendencias en la Evaluación de los Usuarios**
 
