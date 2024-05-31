@@ -173,55 +173,40 @@ corpus_todas_pelis <- corpus(Peliculas, text_field = "review_text")
 summary(corpus_todas_pelis, 5)  # Resumen de los primeros 5 documentos del corpus
 
 # Crear tokens y aplicar transformaciones
+
 tokens_todas_pelis <- tokens(corpus_todas_pelis, 
                              remove_punct = TRUE,   # Eliminar puntuación
                              remove_numbers = TRUE) %>%  # Eliminar números
                     tokens_tolower() %>%  # Convertir a minúsculas
                 tokens_remove(stopwords("spanish")) %>%  # Eliminar stopwords
-             tokens_wordstem()  # Aplicar stemming
+             tokens_wordstem()  # reduce su palabra a raiz
 
 # Verificar los tokens
 print(tokens_todas_pelis[1:5])  # Mostrar los primeros 5 tokens
 
-# Crear un Document-Feature Matrix (dfm)
+# cramos un Document-Feature Matrix (dfm), de esta forma cuantificamos los textos palabras
+
 dfm_todas_pelis <- dfm(tokens_todas_pelis)
 
-# Sumar las frecuencias de cada palabra directamente desde el dfm
-words_todas_pelis <- topfeatures(dfm_todas_pelis, n = nfeat(dfm_todas_pelis))
+# sumamos las frecuencias de cada palabra directamente desde el dfm
+words_todas_pelis <- topfeatures(dfm_todas_pelis, n = nfeat(dfm_todas_pelis)) #extraemos todas las palabras y se odenan descendente
 
-# Convertir a un dataframe
+# convertimos a un dataframe, para facilitar manipulación
 df_todas_pelis <- data.frame(word = names(words_todas_pelis), freq = words_todas_pelis)
 
-# Verificar el dataframe
+# verifcamos el dataframe
 head(df_todas_pelis)  # Mostrar las primeras filas del dataframe
 
 # Generar la nube de palabras
 set.seed(1234)
-wordcloud(words = df_todas_pelis$word, freq = df_todas_pelis$freq, min.freq = 2,
+wordcloud(words = df_todas_pelis$word, freq = df_todas_pelis$freq, min.freq = 2, 
           max.words = 200, random.order = FALSE, rot.per = 0.35,
           colors = brewer.pal(8, "Dark2"))
 
 
 
 
-# Convertir el dfm a una matriz
-matrix_todas_pelis <- as.matrix(dfm_todas_pelis)
-
-# Sumar las frecuencias de cada palabra
-words <- sort(colSums(matrix), decreasing = TRUE)
-df <- data.frame(word = names(words), freq = words)
-
-# Verificar el dataframe
-head(df)  # Mostrar las primeras filas del dataframe
-
-# Generar la nube de palabras
-set.seed(1234)
-wordcloud(words = df$word, freq = df$freq, min.freq = 2,
-          max.words = 200, random.order = FALSE, rot.per = 0.35,
-          colors = brewer.pal(8, "Dark2"))
-
-
-## Ahora haremos una nube de palabra de las 3 mejores peliculas valoradas y de las 3 peores valoradas.
+## Ahora haremos una nube de palabra de la pelicula mejor valorada y de la peor valorada.
 
 # primero ordenamos el dataframe por la media de valoración de forma descendente descendente
 
