@@ -60,7 +60,7 @@ usethis:: use_git()
 
 git status
 
-# **Análisis de Sentimientos en Valoraciones de Películas Españolas: Patrones y Tendencias en la Evaluación de los Usuarios**
+# **Análisis Exploratorio de Valoraciones de Películas Españolas: Perspectivas de los Usuarios y Tendencias de Sentimientos**
 
 ## Grupo : Cristina, Marcos, Romane
 
