@@ -12,6 +12,7 @@ library(readr)
 library(tidyr)
 library(dplyr)
 library(stringr)
+
 ##1r paso.Importar Datos
 
 reviews_filmaffinity <- read_csv("~/Downloads/reviews_filmaffinity.csv", 
