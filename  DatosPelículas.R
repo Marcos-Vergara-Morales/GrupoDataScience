@@ -119,7 +119,6 @@ ggplot(Peliculas, aes(x = review_rate)) +
   labs(title = "Distribución de Puntuaciones de Reseñas",
        x = "Calificación de Reseña",
        y = "Frecuencia")
-
 # Interpretacion de los datos del gráfico
 # En este gráfico se aprecia claramente que la puntuacion de las reseñas se agrupa principalmente en los valores de 5 a 8, tambien observamos algunos picos en valores más bajos que representan las peores reseñas.
 

@@ -148,3 +148,16 @@ Las conclusiones generales a las que llegamos con las pruebas son, por un lado q
 
 
 ## Conclusión
+Nuestro proyecto aborda de manera integral cómo las valoraciones y opiniones de los usuarios en línea influyen en el éxito y la percepción de las películas españolas. A continuación, presentanmos las conclusiones principales del análisis a las que hemos llegado.
+
+En primer lugar, en lo referente a la distribucion de las valoraciones, la mayoría de las valoraciones de las películas se concentra en puntuaciones de 5 a 8, indicando una tendencia general hacia opiniones positivas. No obstante, también se observan picos en las valoraciones más bajas, lo que sugiere una polarización en las opiniones.
+
+Por otro lado, en estas valoraciones resalta la cuestión del género de las peliculas. Los géneros de drama y fantasía son los que reciben las valoraciones más altas, mientras que las películas de comedia y romance tienden a obtener puntuaciones más bajas. Esto sugiere una preferencia del público por géneros que a menudo son considerados más serios o artísticamente valiosos. La cantidad y longitud de las reseñas también varían significativamente según el género, con géneros como la animación y el cine negro recibiendo menos reseñas.
+
+Ademas, tras las pruebas realizadas hemos encontrado que, existe una correlación entre la media de calificación de una película y las valoraciones individuales, aunque esta relación es débil. Sin embargo, las películas con mejores calificaciones promedio tienden a recibir valoraciones altas de manera consistente. . La correlación de Pearson revela una relación débil pero significativa entre la longitud de las reseñas y las calificaciones otorgadas, sugiriendo que las reseñas más largas pueden estar ligeramente asociadas con calificaciones más extremas.
+Las pruebas ANOVA muestran que tanto la longitud de las reseñas como las calificaciones varían significativamente entre diferentes géneros. Esto refuerza la idea de que las expectativas y percepciones del público están fuertemente influenciadas por el género de la película.
+
+Respecto a la cuestion del análisis de sentimientos, a través del análisis de los textos de las reseñas, se ha identificado que las opiniones detalladas proporcionan una visión más rica y específica sobre la percepción del público. Palabras como "película", "cine", "personaje" y "bien" son recurrentes, reflejando aspectos críticos de las evaluaciones.
+
+En definitiva, estos hallazgos pueden ser de gran utilidad para cineastas, productores y distribuidores. Comprender las tendencias en las valoraciones y los géneros preferidos permite tomar decisiones informadas para mejorar la recepción y el éxito de las películas en el mercado.
+
