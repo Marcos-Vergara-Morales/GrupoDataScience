@@ -19,7 +19,7 @@ library(RcppArmadillo)
 library(RcppParallel)
 
 
-##1r paso.Importar Datos
+##1º paso.Importar Datos
 
 reviews_filmaffinity <- read_csv("C:/Users/crist/Downloads/reviews_filmaffinity.csv", 
                                  col_types = cols(`film_name||gender||film_avg_rate||review_rate||review_title||review_text` = col_character()))
@@ -27,7 +27,7 @@ reviews_filmaffinity <- read_csv("C:/Users/crist/Downloads/reviews_filmaffinity.
 problems(reviews_filmaffinity)
 View(reviews_filmaffinity)
 
-#2ndo paso. Ver datos y limpiar datos
+#2º paso. Ver datos y limpiar datos
 
 # Separar la columna en múltiples columnas, ya que al extraerlos estaban todos en la misma columna y daba problemas cuando se han extarido además
 
@@ -103,7 +103,7 @@ Peliculas <- Peliculas %>%
 
 
 
-#Visualizar datos y comparar
+#3º paso. Visualizar datos y comparar
 
 ##PAQUETE VISUALIZACIÓN DE DATOS
 
@@ -111,12 +111,17 @@ install.packages("ggplot2")
 
 library(ggplot2)
 
+# A) GRÁFICOS DE BARRAS 
+
 # Distribución de nota/calificacion de reseña
 ggplot(Peliculas, aes(x = review_rate)) +
   geom_histogram(binwidth = 1, fill = "blue", color = "black") +
   labs(title = "Distribución de Puntuaciones de Reseñas",
        x = "Calificación de Reseña",
        y = "Frecuencia")
+
+# Interpretacion de los datos del gráfico
+# En este gráfico se aprecia claramente que la puntuacion de las reseñas se agrupa principalmente en los valores de 5 a 8, tambien observamos algunos picos en valores más bajos que representan las peores reseñas.
 
 # Media de nota/calificacion por película
 ggplot(medias_por_pelicula, aes(x = reorder(film_name, media_review_rate), y = media_review_rate)) +
@@ -126,14 +131,22 @@ ggplot(medias_por_pelicula, aes(x = reorder(film_name, media_review_rate), y = m
        x = "Nombre de Película",
        y = "Media de Calificación")
 
+# Interpretacion del gráfico: 
+# En el grafico podemos observar que las peliculas con mejor puntuacion ( mas de un 6), son generalmente del género dramático (Mientras dure la guerra, El laberinto del fauno), tambien son peliculas galardonadas por la critica y que tuvieron un exito fulminante en taquilla, lo cual va en la linea de una de nuestras hipotesis sobre las reseñas en peliculas taquilleras.
+
 # Comparación de nota/calificacion por Género
 ggplot(Peliculas, aes(x = gender, y = review_rate)) +
   geom_boxplot() +
   labs(title = "Comparación de Puntuaciones por Género",
        x = "Género",
        y = "Calificación de Reseña")
+# Intrepretación del gráfico
+# El género que mayores puntuacion recibe es el fantastico, seguido del Drama, el terror, el thriller, el cine negro y el de aventuras.
+# Hay más valoraciones en el cine de Aventuras, la comedia, el musical y el romance, pero en estos dos ultimos su puntuacion es mucho más baja.
+# Parece haber menos reseñas sobre animación y cine negro
 
 
+# B) NUBES DE PALABRAS
 ##Creación de nube de palabras en los cometarios de peliculas(review text)
 
 #Instalar y cargar paquetes que se necesitan
@@ -153,6 +166,7 @@ library(NLP)
 library(RColorBrewer)
 library(quanteda)
 library(RcppParallel)
+library(ggplot2)
 
 ## Primero vamos a revisar si dentro de nuestra variable review_text hay opiniones vacíos
 
@@ -171,11 +185,11 @@ cat("Número de opiniones vacías:", num_EMPTY, "\n")
 Peliculas <- Peliculas[!(is.na(Peliculas$review_text) | Peliculas$review_text == ""), ]
 
 
-#construimos corpus a partir de la varible review_text(usamos paquete "quanteda" ya que sirve manejar grandes conjuntos de datos)
+#Construimos corpus a partir de la varible review_text(usamos paquete "quanteda" ya que sirve manejar grandes conjuntos de datos)
 
 corpus_todas_pelis <- corpus(Peliculas, text_field = "review_text")
 
-# verificamos el contenido del corpus
+# Verificamos el contenido del corpus
 summary(corpus_todas_pelis, 5)  # Resumen de los primeros 5 documentos del corpus
 
 # Crear tokens y aplicar transformaciones
@@ -190,17 +204,17 @@ tokens_todas_pelis <- tokens(corpus_todas_pelis,
 # Verificar los tokens
 print(tokens_todas_pelis[1:5])  # Mostrar los primeros 5 tokens
 
-# cramos un Document-Feature Matrix (dfm), de esta forma cuantificamos los textos palabras
+# Creamos un Document-Feature Matrix (dfm), de esta forma cuantificamos los textos palabras
 
 dfm_todas_pelis <- dfm(tokens_todas_pelis)
 
-# sumamos las frecuencias de cada palabra directamente desde el dfm
+# Sumamos las frecuencias de cada palabra directamente desde el dfm
 words_todas_pelis <- topfeatures(dfm_todas_pelis, n = nfeat(dfm_todas_pelis)) #extraemos todas las palabras y se odenan descendente
 
-# convertimos a un dataframe, para facilitar manipulación
+# Convertimos a un dataframe, para facilitar manipulación
 df_todas_pelis <- data.frame(word = names(words_todas_pelis), freq = words_todas_pelis)
 
-# verifcamos el dataframe
+# Verificamos el dataframe
 head(df_todas_pelis)  # Mostrar las primeras filas del dataframe
 
 # Generar la nube de palabras
@@ -209,12 +223,16 @@ wordcloud(words = df_todas_pelis$word, freq = df_todas_pelis$freq, min.freq = 2,
           max.words = 200, random.order = FALSE, rot.per = 0.35,
           colors = brewer.pal(8, "Dark2"))
 
+# Interpretacion de la nube de palabras:
+# Las palabras más repetidas en los comentarios sobre peliculas son en primer lugar la palabra película, lo cual tiene sentido.
+# Por otro lado, destacan palabras como cine, personaje, bien. También aunque en menor medida aparecen lso terminos: buena, español, actor,  guión, aunque, mejor, menos.
+# A simple vista, no aparece ningun termino fuera del contexto de la valoración de peliculas
 
 
 
 ## Ahora haremos una nube de palabra de la pelicula mejor valorada y de la peor valorada.
 
-# primero ordenamos el dataframe por la media de valoración de forma descendente descendente
+# Primero Ordenamos el dataframe por la media de valoración de forma descendente descendente
 
 medias_por_pelicula_ordenado <- medias_por_pelicula %>%
   arrange(desc(media_review_rate))
@@ -241,7 +259,7 @@ pelicula_elbola <- Peliculas[Peliculas$film_name == nombre_pelicula1, ]
 
 head(pelicula_elbola)
 
-# creamos el corpus a partir de review_text
+# Creamos el corpus a partir de review_text
 # Crear el corpus usando quanteda
 
 corpus_elbola <- corpus(pelicula_elbola$review_text)
@@ -261,7 +279,7 @@ tokens_elbola <- tokens(corpus_elbola,
 # Verificar los tokens
 print(tokens_elbola[1:5])  # mostramos los 5 primeros tokens
 
-# creamos un Document-Feature Matrix (dfm) 
+# Creamos un Document-Feature Matrix (dfm) 
 dfm_elbola <- dfm(tokens_elbola)
 
 # Verificar el dfm
@@ -284,12 +302,18 @@ wordcloud(words = df_elbola$word, freq = df_elbola$freq, min.freq = 2,
           max.words = 200, random.order = FALSE, rot.per = 0.35,
           colors = brewer.pal(8, "Dark2"))
 
+# Interpretación nube de palabra de la pelicula mejor valorada y de la peor valorada
+# En primer lugar, observamos que nuevamente la palabras más utilizada es pelicula, seguida de bola, ballesta y padre. Lo cual aparentemente no tien sentido sino lo comparamos con el argumento de las peliculas analizadas.
+# En segundo lugar, aparecen terminos como: juan, mejor, cine, historia y jose. Estos estan relacionados nuevamente con la tematica y el argumento de ambas peliculas
+# En terminos generales, no se aprecia ninguna palabras especialmente relevante en esta nube.
+
+
 
 # Peor película valorada: Torrente(3,52)
 
-#Vamos a realizar nube de datos
+#Vamos a realizar nube de datos sobre la peor pelicula
 
-# seleccionamos pelicula
+#Seleccionamos pelicula
 
 nombre_pelicula2 <- "Torrente 3"
 
@@ -344,6 +368,130 @@ set.seed(1234)  # Para reproducibilidad
 wordcloud(words = df_torrente$word, freq = df_torrente$freq, min.freq = 2,
           max.words = 200, random.order = FALSE, rot.per = 0.35,
           colors = brewer.pal(8, "Dark2"))
+# 
+#Interpretación nube de palabras de la peor pelicula: 
+# En este caso, las palabras más utilizadas son pelicula y torrente, lo cual tiene sentido si observamos la pelicula que se esta analizando
+# También se utiliza mucho la palabras segura, tercera parte, santiago, personaje y cine
+# Nuevamente no se encuentran palabras destacables en el conjunto. 
 
 
+# C) CORRELACION Y PRUEBAS PARAMETRICAS. ANOVA
+# Finalmente vamos a establecer uan comparacion entre la variable review rate y la longitud de las reseñas, con el fin de observar si existe relacion entre la nota otorgada a la pelicula y la longitud de la reseña
+# Calcular la longitud del texto de la reseña:
 
+# 1.Añadir una columna que mida la longitud de review_text.
+# Separar la columna en múltiples columnas
+reviews_filmaffinity_separado <- reviews_filmaffinity %>%
+  separate("film_name||gender||film_avg_rate||review_rate||review_title||review_text", 
+           into = c("film_name", "gender", "film_avg_rate", "review_rate", "review_title", "review_text"), 
+           sep = "\\|\\|", 
+           remove = TRUE)
+
+# Transformación a variables numéricas
+reviews_filmaffinity_separado <- reviews_filmaffinity_separado %>%
+  mutate(film_avg_rate = as.numeric(film_avg_rate),
+         review_rate = as.numeric(review_rate)) 
+
+# Eliminar la columna film_avg_rate (todos valores NA)
+reviews_filmaffinity_separado <- reviews_filmaffinity_separado %>%
+  select(-film_avg_rate)
+
+# Eliminar NA en la columna review_rate
+reviews_filmaffinity_separado <- reviews_filmaffinity_separado[!is.na(reviews_filmaffinity_separado$review_rate), ]
+
+# Añadir una columna para la longitud del texto de la reseña
+reviews_filmaffinity_separado <- reviews_filmaffinity_separado %>%
+  mutate(review_text_length = nchar(review_text))
+
+# 2.Calcular la correlación entre review_rate y review_text_length:
+# Calcular la correlación de Pearson entre review_rate y review_text_length
+correlacion <- cor(reviews_filmaffinity_separado$review_rate, reviews_filmaffinity_separado$review_text_length, method = "pearson")
+p_value <- cor.test(reviews_filmaffinity_separado$review_rate, reviews_filmaffinity_separado$review_text_length)$p.value
+
+# 3.Usar la correlación de Pearson para evaluar la relación.
+# Mostrar resultados
+cat("Correlación de Pearson entre review_rate y review_text_length:", correlacion, "\n")
+cat("Valor p:", p_value, "\n")
+
+
+# REsultados de la prueba de Pearson
+# los resultados, Correlación de Pearson: 0.045519
+# Este valor es muy cercano a 0, lo que indica una relación muy débil entre la longitud de la reseña (review_text_length) y la calificación de la reseña (review_rate). En otras palabras, no parece haber una relación lineal fuerte entre estas dos variables
+# Por otro lado, con un valor de p=2,40987e-05 que es extremadamente bajo, mucho menor que el umbral comúnmente utilizado de 0.05. Esto sugiere que, a pesar de la baja correlación, la relación observada entre la longitud de la reseña y la calificación es estadísticamente significativa.
+# En definitiva, Aunque la correlación es muy débil (0.045519), la relación es estadísticamente significativa (valor p ≈ 0.0000241). Esto indica que existe una relación entre la longitud del texto de la reseña y la calificación, pero esta relación es muy tenue y probablemente no tenga un gran impacto práctico.
+# en otras palabras, todo parece indicar que las personas cuando opinan y valoran un pelicula en funcion de la nota que le den, sobre todo en el caso de las notas altas y bajas tengan una longitud de reseña diferente, aunque esta tendencia es debil y no podemos asegurar que no se deba a otro factores.
+
+# Como queda esa incognita en el aire, decidimo hacer una comparacion mas, queremos analizar analizar si el género de la película influye en la longitud de la reseña y en la calificación de la reseña
+# Hacemos prueba de comparacion de medias y ANOVA
+# primero limpiamos los datos de nuevo para garantizar que salga bien la prueba
+# Verificar y limpiar valores NA
+reviews_filmaffinity_separado <- reviews_filmaffinity_separado %>%
+  filter(!is.na(gender), !is.na(review_text_length), !is.na(review_rate))
+
+# 1. Realizar la prueba de ANOVA con las variables
+# ANOVA para la longitud de la reseña por género
+anova_length <- aov(review_text_length ~ gender, data = reviews_filmaffinity_separado)
+summary(anova_length)
+
+# ANOVA para la calificación de la reseña por género
+anova_rate <- aov(review_rate ~ gender, data = reviews_filmaffinity_separado)
+summary(anova_rate)
+
+# Reiniciar el dispositivo gráfico
+while (!is.null(dev.list())) dev.off()
+
+
+# Hacemos representaciones graficas para que se aprecie mejor la relacion entre las variables
+
+# Gráfico de barras para la longitud de la reseña por género
+ggplot(reviews_filmaffinity_separado, aes(x = gender, y = review_text_length)) +
+  stat_summary(fun = mean, geom = "bar", fill = "blue", color = "black") +
+  labs(title = "Longitud Promedio de la Reseña por Género de Película",
+       x = "Género",
+       y = "Longitud Promedio de la Reseña")
+# Interpretación del gráfico:
+# Se observa que las reseñas con mayor longitud son las de las peliculas de los géneros de Animación, Aventuras y cine negro.
+# Seguidas de las de Drama y Thriller, el género con la mayor longitud de reseña es el cine negro, si comparamos esto con los rsultados de las gráficas anteriores, todo apunta a que los géneros con reseñas más largas son aquellos que tienen las peores o mejores puntuaciones, como sugiere una de nuestras hipótesis 
+# Los musicales son los que tienen menor longitud en sus reseñas
+
+# Gráfico de barras para la calificación de la reseña por género
+ggplot(reviews_filmaffinity_separado, aes(x = gender, y = review_rate)) +
+  stat_summary(fun = mean, geom = "bar", fill = "blue", color = "black") +
+  labs(title = "Calificación Promedio de la Reseña por Género de Película",
+       x = "Género",
+       y = "Calificación Promedio de la Reseña")
+# Interpretación del gráfico:
+# El cine negro, el cine Fantastico, el Drama, el terror y el thrille son lso géneros con las mayores puntuaciones promedio en las reseñas
+# el cine Fantastico es el que tiene la mejor puntuacion 
+
+## Ejemplos gráficos de Violin (mejora de al visualización)
+# Gráfico de violín para la longitud de la reseña por género
+ggplot(reviews_filmaffinity_separado, aes(x = gender, y = review_text_length)) +
+  geom_violin(fill = "blue") +
+  labs(title = "Distribución de la Longitud de la Reseña por Género de Película",
+       x = "Género",
+       y = "Longitud de la Reseña")
+
+# Gráfico de violín para la calificación de la reseña por género
+ggplot(reviews_filmaffinity_separado, aes(x = gender, y = review_rate)) +
+  geom_violin(fill = "blue") +
+  labs(title = "Distribución de la Calificación de la Reseña por Género de Película",
+       x = "Género",
+       y = "Calificación de la Reseña")
+
+# Interpretacion de los resultados: 
+
+# 1.Resultados prueba ANOVA longitud de reseña por género
+# Observamos primero lso resultados de la prueba ANOVA para la longitud de la reseña por género
+# Podemos apreciar, los grados de libertad, los residuos, y el p valor, el cual es <2e-16, que es extremadamente pequeño. Este valor indica la probabilidad de que las diferencias al azar y al ser menos al 0,05, el resultado es estadisticamente significativo
+# Dicho valor de p sugiere que hay una diferencia significativa entre los géneros en términos de la longitud de la reseña.
+
+
+# 2. Resultados prueba ANOVA
+# Observamos los grados de libertad, los residuos, el valor F(determinar la diferencia entre medias) y el P valor
+# El F valor es de 82.74, el P valor es <2e-16, que es extremadamente pequeño, lo cual indica que es significativo estaditicamente al ser menor al 0,05.
+# En definitiva, el P valor indica que hay una diferencia significativa entre los géneros en términos de la calificación de la reseña.
+
+# CONCLUSIONES GENERALES DE LAS PRUEBAS:
+# El valor F alto y el valor p extremadamente bajo indican que la longitud de las reseñas varía significativamente entre los diferentes géneros de películas
+# Por otro lado, dichos valores  indican que las calificaciones de las reseñas también varían significativamente entre los diferentes géneros de películas.

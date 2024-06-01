@@ -36,6 +36,8 @@ En primer lugar se hará un Análisis Exploratorio de Datos (EDA), donde se real
   - Boxplots de Valoraciones por Género: Se utilizarán boxplots para comparar las valoraciones (review_rate) entre diferentes géneros cinematográficos (gender_film), proporcionando información sobre las preferencias de los espectadores según el género de la película. Esta técnica permitirá identificar qué géneros tienden a recibir calificaciones más altas o más bajas, y si existen diferencias significativas en las valoraciones según el tipo de película.
   
   - Scatter Plots para Analizar la Relación entre Media de la Película y Valoración Individual: Se crearán scatter plots para investigar la relación entre la media de la película (film_average_rate) y la valoración individual (review_rate). Este análisis ayudará a determinar si existe una correlación entre la calidad percibida de una película y la satisfacción del espectador expresada en la valoración. La visualización de esta relación permitirá identificar si las películas con mejores calificaciones promedio tienden a recibir valoraciones más altas de manera consistente.
+  
+- Correlacion de Pearson y Prueba ANOVA: ambas se utilizaran para comparar y analizar variables, como review rate y review_text_length con el fin de establecer si existe correlacion entre ambas, y la prueba ANOVA para examinar esas dos variables pero introduciendo la variable genero de las peliculas para comprobar si en funcion del genero varian las reseñas y la puntuacion, para ello crearemos una variable numerica (review_text_length) que nos permita llevar a cabo estas pruebas y realizaremos representaciones graficas con la funcion ggplot2, para que se aprecie mejor visualmente.
 
 Análisis de Sentimientos:
 
