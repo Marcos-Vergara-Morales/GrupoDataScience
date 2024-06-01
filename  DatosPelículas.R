@@ -415,7 +415,7 @@ cat("Valor p:", p_value, "\n")
 
 
 # REsultados de la prueba de Pearson
-# los resultados, Correlación de Pearson: 0.045519
+# Los resultados, Correlación de Pearson: 0.045519
 # Este valor es muy cercano a 0, lo que indica una relación muy débil entre la longitud de la reseña (review_text_length) y la calificación de la reseña (review_rate). En otras palabras, no parece haber una relación lineal fuerte entre estas dos variables
 # Por otro lado, con un valor de p=2,40987e-05 que es extremadamente bajo, mucho menor que el umbral comúnmente utilizado de 0.05. Esto sugiere que, a pesar de la baja correlación, la relación observada entre la longitud de la reseña y la calificación es estadísticamente significativa.
 # En definitiva, Aunque la correlación es muy débil (0.045519), la relación es estadísticamente significativa (valor p ≈ 0.0000241). Esto indica que existe una relación entre la longitud del texto de la reseña y la calificación, pero esta relación es muy tenue y probablemente no tenga un gran impacto práctico.
