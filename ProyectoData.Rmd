@@ -1,7 +1,0 @@
----
-title: "ProyectoData"
-output: html_document
-date: "2024-05-12"
----
-
-
