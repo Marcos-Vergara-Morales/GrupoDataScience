@@ -1,0 +1,10 @@
+---
+title: "ENLACE PRESENTACIÓN CANVA"
+author: "Marcos Vergara Morales y Cristina Miguel de Dios"
+output: html_document
+date: "2024-06-02"
+---
+
+Este repositorio es un enlace a la presentación del trabajo realizada por CANVA
+
+[Análisis de Sentimientos en Valoraciones de Películas Españolas.](https://www.canva.com/design/DAGG5XuVMWQ/6SlfWvGOAN9sus0fVVXPgA/edit "DataSciencePresentación")
